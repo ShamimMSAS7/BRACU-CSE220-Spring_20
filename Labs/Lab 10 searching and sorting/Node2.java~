@@ -1,0 +1,12 @@
+class Node2{
+  int val;
+  Node prev;
+  Node next;
+  Node2(int v, Node p, Node n){
+    val=v;
+    prev=p;
+    next=n;
+  }
+  
+  
+}

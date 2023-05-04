@@ -1,0 +1,43 @@
+public class KeyIndex{
+  int []k;
+  int min;
+  
+  KeyIndex(int []a){
+    min=a[0];
+    int max=a[0];
+    for(int i=1;i<a.length;i++){
+      if(a[i]<min)
+        min=a[i];
+      else if(a[i]>max)
+        max=a[i];
+    }
+    k=new int[max-min+1];
+    for(int i=0;i<a.length;i++)
+      k[a[i]-min]++;
+  }
+  
+  
+  boolean search(int val){
+    if(val<min || val>k.length+min-1 || k[val-min]==0)
+      return false;
+    return true;
+  }
+  
+  
+  void sort(){
+    int n=0;
+    for(int i=0;i<k.length;i++)
+      n=n+k[i];
+    int []l=new int[n];
+    for(int i=0,j=0;i<k.length;i++){
+      if(k[i]>0){
+        l[j++]=i+min;
+        k[i]--;
+        i--;
+      }
+    }
+    k=l;
+  }
+  
+  
+}

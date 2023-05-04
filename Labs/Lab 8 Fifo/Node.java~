@@ -1,0 +1,10 @@
+public class Node{
+  Patient patient;
+  Node next;
+  Node prev;
+  Node(Patient p, Node n, Node p){
+    patient=p;
+    next=n;
+    prev=p;
+  }
+}

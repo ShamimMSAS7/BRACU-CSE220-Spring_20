@@ -1,0 +1,78 @@
+public class Assignment{
+  public void veryEasy(LinkedList l){
+    int count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0){
+        if(count==0)
+          System.out.print(n.element);
+        else
+          System.out.print(","+n.element);
+        count++;
+      }
+    }
+    System.out.println();
+  }
+  
+  
+  public Object[] easy(LinkedList l){
+    int count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0)
+        count++;
+    }
+    Object []array=new Object[count];
+    count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0)
+        array[count++]=n.element;
+    }
+    return array;
+  }
+  
+  public void medium(LinkedList l){
+    int count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0){
+        l.remove(count);
+        break;
+      }
+      count++;
+    }
+  }
+  public void hard(LinkedList l){
+    int count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0)
+        l.remove(count);
+      else
+        count++;
+    }
+  }
+  public void veryHard(LinkedList l){
+    int count=0;
+    for(Node n=l.head;n!=null;n=n.next){
+      if(Integer.valueOf(String.valueOf(n.element))%2==0)
+        break;
+      count++;
+    }
+    if(count<l.countNode()){
+       Node head=new Node(l.nodeAt(count).element,null);
+       Node tail=head;
+       for(Node n=l.nodeAt(count).next;n!=null;n=n.next){
+         if(Integer.valueOf(String.valueOf(n.element))%2==0){
+           Node k=new Node(n.element,null);
+           tail.next=k;
+           tail=tail.next;
+         }
+       }
+       for(Node n=l.head;n!=null;n=n.next){
+         if(Integer.valueOf(String.valueOf(n.element))%2!=0){
+           Node k=new Node(n.element,null);
+           tail.next=k;
+           tail=tail.next;
+         }
+       }
+       l.head=head;
+    }
+  }
+}

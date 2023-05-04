@@ -1,0 +1,8 @@
+import java.util.Scanner;
+public class Tester{
+  public static void main(String[]args){
+    scanner sc=new Scanner(System.in);
+    MyOrderList m=new MyOrderList();
+    m.showList();
+  }
+}

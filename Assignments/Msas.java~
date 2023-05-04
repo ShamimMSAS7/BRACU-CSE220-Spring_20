@@ -1,0 +1,14 @@
+public class Msas{
+  public static void main(String[]args){
+    int arr[]={30,20,50,70};
+    System.out.println(findMid(arr,0,1));
+  }
+  public static int findMin(int []arr,int i,int j){
+    if(j==arr.length)
+      return arr[i];
+    if(arr[j]<arr[i]){
+      findMin(arr,j,j++);
+    } else
+      findMin(arr,i,j++);
+  }
+}

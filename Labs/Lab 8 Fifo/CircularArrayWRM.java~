@@ -1,0 +1,64 @@
+import java.util.Scanner;
+public class CircularArrayWRM implements WRM{
+  Patient []cir=new Patient[1];
+  int size=0;
+  int start=0;
+  Scanner sc=new Scanner(System.in);
+  
+  
+  void resize(){
+    Patient []msas=new Patient[cir.length+1];
+    for(int i=start;i<start+size;i++){
+      msas[i%msas.length]=cir[i%cir.length];
+    }
+    cir=msas;
+  }
+  
+  
+  void registerPatient(){
+    System.out.println("Enter the name of the patient");
+    String name=sc.nextLine();
+    System.out.println("Enter the age of the patient");
+    int age=sc.nextInt();
+    sc.nextLine();
+    System.out.println("Enter the Blood Group of the patient");
+    String bg=sc.nextLine();
+    System.out.println("Enter the priority of the patient");
+    int priority=sc.nextInt();
+    sc.nextLine();
+    Patient p=new Patient(name,age,bg,priority);
+    if(size==cir.length)
+      resize();
+    cir[(start+size)%cir.length]=p;
+    for(int i=start+size;i>start;i--){
+      if(cir[i%cir.length].getPriority()<cir[(i-1)%cir.length].getPriority()){
+        Patient temp=cir[i%cir.length];
+        cir[i%cir.length]=cir[(i-1)%cir.length];
+        cir[(i-1)%cir.length]=temp;
+      }
+    }
+    size++;
+  }
+  
+  
+  Patient servePatient(){
+    if(size==0)
+      return null;
+    Patient p=cir[start];
+    start=(start+1)%cir.length;
+    size--;
+    return p;
+  }
+  void cancelAll(){
+    size=0;
+  }
+  boolean canDoctorGoHome(){
+    if(size==0)
+      return true;
+    return false;
+  }
+  void showAllPatient(){
+    for(int i=start;i<start+size;i++)
+      cir[i%cir.length].printDetail();
+  }
+}

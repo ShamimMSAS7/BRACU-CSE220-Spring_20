@@ -1,0 +1,10 @@
+public class Lab1Task12{
+  public boolean comesFirst(int month1,int day1, int month2, int day2){
+    if(month1<month2)
+      return true;
+    if(month2<month1)
+      return false;
+    if(day1<day2)
+      return true;
+  }
+}

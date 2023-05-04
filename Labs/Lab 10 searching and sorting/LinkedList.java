@@ -1,0 +1,21 @@
+class LinkedList{
+  Node head;
+  LinkedList(int []array){
+    head=makeList(null,array,0);
+  }
+  
+  Node makeList(Node n,int []array, int i){
+    if(i>=array.length)
+      return null;
+    n=new Node(array[i],null);
+    n.next=makeList(n.next,array,i+1);
+    return n;
+  }
+  
+  void printList(Node n){
+    if(n!=null){
+      System.out.print(n.val+" ");
+      printList(n.next);
+    }
+  }
+}

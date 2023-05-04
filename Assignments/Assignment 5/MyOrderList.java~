@@ -1,0 +1,40 @@
+public class MyOrderList{
+  Node cursor;
+  MyOrderList(){
+    cursor=null;
+  }
+  void insert(Node newElement){
+    if(cursor==null){
+      cursor=new Node(newElement.key,cursor);
+    }else{
+      Node p=cursor;
+      Node n=cursor;
+      Node tail=cursor;
+      do{
+        if(tail.key<tail.next.key){
+          if(newElement.key>tail.key){
+            if(newElement.key<tail.next.key){
+              p=tail;
+              n=tail.next;
+              break;
+            }
+          }
+        } else{
+          if(newElement.key<tail.next.key || newElement.key>tail.key){
+            p=tail;
+            n=tail.next;
+            break;
+          }
+        }
+        tail=tail.next;
+      }while(tail!=cursor)
+      Node temp=new Node(newElement.key,n);
+      p.next=temp;
+    }
+  }
+  Node retrive(int searchKey){
+    if(cursor==null)
+      return null;
+    for(Node n=cursor.next;n!=cursor)
+  }
+}

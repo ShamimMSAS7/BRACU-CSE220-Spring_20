@@ -1,0 +1,112 @@
+import java.util.Scanner;
+public class ListWRM implements WRM{
+  Node head;
+  int size;
+  Scanner sc=new Scanner(System.in);
+  public ListWRM(){
+    head=new Node(null,null,null);
+    size=0;
+  }
+  
+  public void registerPatient(){
+    System.out.println("Enter the name of the patient");
+    String name=sc.nextLine();
+    System.out.println("Enter the age of the patient");
+    int age=sc.nextInt();
+    sc.nextLine();
+    System.out.println("Enter the Blood Group of the patient");
+    String bg=sc.nextLine();
+    System.out.println("Enter the priority of the patient");
+    int priority=sc.nextInt();
+    sc.nextLine();
+    Patient p=new Patient(name,age,bg,priority);
+    Node n=new Node(p,null,null);
+    if(size==0){
+      head.next=n;
+      head.prev=n;
+      n.next=head;
+      n.prev=head;
+    }else{
+      Node next=head.next;
+      Node prev=head;
+      for(Node k=head.prev;k!=head;k=k.prev){
+        if(p.getPriority()>k.patient.getPriority()){
+          next=k.next;
+          prev=k;
+          break;
+        }
+      }
+      n.next=next;
+      n.prev=prev;
+      prev.next=n;
+      next.prev=n;
+    }
+    size++;
+  }
+  
+  
+  public Patient servePatient(){
+    if(size==0)
+      return null;
+    Patient p=head.next.patient;
+    head.next=head.next.next;
+    head.next.prev=head;
+    size--;
+    return p;
+  }
+  
+  
+  public void cancelAll(){
+    head.next=null;
+    head.prev=null;
+    size=0;
+  }
+  
+  
+  public boolean canDoctorGoHome(){
+    if(size==0)
+      return true;
+    return false;
+  }
+  
+  
+  public void showAllPatient(){
+    if(size!=0){
+      Node head2=new Node(null,null,null);
+      Node tail2=head2;
+      for(Node tail=head.next;tail!=head;tail=tail.next){
+        Node n=new Node(tail.patient,null,tail2);
+        tail2.next=n;
+        tail2=n;
+      }
+      head2.prev=tail2;
+      tail2.next=head2;
+      for(Node i=head2.next;i!=head2;i=i.next){
+        for(Node j=i.next;j!=head2;j=j.next){
+          if(j.patient.getName().compareTo(i.patient.getName())<0){
+            Node ni=i.next;
+            Node pi=i.prev;
+            Node nj=j.next;
+            Node pj=j.prev;
+            pi.next=j;
+            nj.prev=i;
+            j.prev=pi;
+            i.next=nj;
+            if(pj==i && ni==j){
+              i.prev=j;
+              j.next=i;
+            } else{
+              i.prev=pj;
+              j.next=ni;
+              pj.next=i;
+              ni.prev=j;
+            }
+          }
+        }
+      }
+      for(Node n=head2.next;n!=head2;n=n.next)
+        n.patient.printDetail();
+    }else
+      System.out.println("No patient to show");
+  }
+}

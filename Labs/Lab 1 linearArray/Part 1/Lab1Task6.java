@@ -1,0 +1,20 @@
+import java.util.Scanner;
+public class Lab1Task6{
+  public static void main(String[]args){
+    Scanner sc=new Scanner(System.in);
+    System.out.println("Enter the size of array");
+    int []x=new int[sc.nextInt()];
+    for(int i=0;i<x.length;i++)
+      x[i]=sc.nextInt();
+    int count=0;
+    for(int i=0;i<x.length/2;i++){
+      if(x[i]!=x[x.length-1-i]){
+        count++;
+        System.out.println("This array is not a palindrome");
+        break;
+      }
+    }
+    if(count==0)
+      System.out.println("This array is a palindrome");
+  }
+}
